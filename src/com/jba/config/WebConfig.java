@@ -7,7 +7,9 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesView;
 
 @Configuration
 @EnableWebMvc
@@ -22,10 +24,17 @@ public void configureDefaultServletHandling(
 @Bean
 ViewResolver viewResolver()
 {
-	InternalResourceViewResolver ir = new InternalResourceViewResolver();
-	ir.setPrefix("/WEB-INF/views/");
-	ir.setSuffix(".jsp");
-	ir.setExposeContextBeansAsAttributes(true);
-	return ir;
+	UrlBasedViewResolver ur = new UrlBasedViewResolver();
+	ur.setViewClass(TilesView.class);
+	return ur;
 }
+
+@Bean
+TilesConfigurer tilesConfigurer()
+{
+	TilesConfigurer t = new TilesConfigurer();
+	t.setDefinitions("/WEB-INF/defs/general.xml");
+	return t;
+}
+
 }

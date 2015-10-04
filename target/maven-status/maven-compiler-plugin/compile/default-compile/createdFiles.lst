@@ -1,0 +1,4 @@
+com\jba\controller\IndexController.class
+com\jba\config\WebConfig.class
+com\jba\config\RootConfig.class
+com\jba\config\DispatcherServletInitializer.class
